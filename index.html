@@ -1,0 +1,105 @@
+<!doctype html>
+<!-- See http://www.firepad.io/docs/ for detailed embedding docs. -->
+<html>
+<head>
+	<meta charset="utf-8" />
+	<!-- Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+
+	<!-- ACE and its JavaScript mode and theme files -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.5/ace.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.5/mode-html.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.5/theme-vibrant_ink.js"></script>
+
+	<!-- Firepad -->
+	<link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.css" />
+	<script src="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.min.js"></script>
+
+	<style>
+		html {
+			height: 100%;
+			width: 100%;
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		
+		body {
+			margin: 0;
+			height: 100%;
+			position: relative;
+			display: flex;
+		}
+		
+		.firepad {
+			width: 50%;
+		}
+		
+		#firepad-container {
+			width: 100%;
+			height: 100%;
+			box-sizing: border-box;
+		}
+		
+		#result-container {
+			width: 50%;
+			height: 100%;
+			box-sizing: border-box;
+		}
+	</style>
+</head>
+
+<body onload="init()">
+	<div id="firepad-container"></div>
+	<iframe id="result-container"></iframe>
+	
+	<script>
+		var editor = null;
+		function init() {
+			//// Initialize Firebase.
+			//// TODO: replace with your Firebase project configuration.
+			var config = {
+				apiKey: "AIzaSyBz_UWzwrJX9OaJHirz2Phu2zXRkqglR64",
+//				authDomain: "firepad-tests.firebaseapp.com",
+				databaseURL: "firepad-c7916.firebaseio.com"
+			};
+			firebase.initializeApp(config);
+			//// Get Firebase Database reference.
+			var firepadRef = getExampleRef();
+			//// Create ACE
+			editor = ace.edit("firepad-container");
+			editor.setTheme("ace/theme/vibrant_ink");
+			editor.getSession().on('change', function() { updateIframe(editor); });
+			var session = editor.getSession();
+			session.setUseWrapMode(true);
+			session.setUseWorker(false);
+			session.setMode("ace/mode/html");
+			//// Create Firepad.
+			var firepad = Firepad.fromACE(firepadRef, editor, {
+				defaultText: '<html>\n\t<head>\n\t\t<title>New Page</title>\n\t</head>\n<body>\n\n<h3>Hello World!</h3>\n\n</body>\n</html>'
+			});
+		}
+		function updateIframe(editor) {
+			var doc = document.getElementById("result-container").contentWindow.document;
+			doc.open();
+			doc.write(editor.getValue());
+			doc.close();
+		}
+		// Helper to get hash from end of URL or generate a random one.
+		function getExampleRef() {
+			var ref = firebase.database().ref();
+			var hash = window.location.hash.replace(/#/g, '');
+			if (hash) {
+				ref = ref.child(hash);
+			} else {
+				ref = ref.push(); // generate unique location.
+				window.location = window.location + '#' + ref.key; // add it as a hash to the URL.
+			}
+			if (typeof console !== 'undefined') {
+				console.log('Firebase data: ', ref.toString());
+			}
+			return ref;
+		}
+	</script>
+</body>
+</html>
