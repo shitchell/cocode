@@ -18,15 +18,12 @@ header {
 	width: 100%;
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	background: black;
 	color: white;
-	padding-left: .5em;
+	padding: 0 .5em;
 	box-sizing: border-box;
 	border-bottom: 3px solid #666;
-}
-
-header>* {
-	margin-right: .5em;
 }
 
 #navicon {

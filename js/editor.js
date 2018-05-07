@@ -96,3 +96,10 @@ function getDatabaseRef() {
 	return ref;
 }
 
+$(document).ready(function() {
+	init();
+	
+	$("#navicon").click(function(event) {
+		event.stopPropogation();
+	});
+});
