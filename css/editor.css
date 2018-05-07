@@ -10,6 +10,36 @@ body {
 	margin: 0;
 	height: 100%;
 	position: relative;
+	font-family: monospace;
+}
+
+header {
+	height: 40px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	background: black;
+	color: white;
+	padding-left: .5em;
+	box-sizing: border-box;
+	border-bottom: 3px solid #666;
+}
+
+header>* {
+	margin-right: .5em;
+}
+
+#navicon {
+	color: #FFF;
+	text-decoration: none;
+}
+
+content {
+	position: absolute;
+	top: 40px;
+	left: 0;
+	right: 0;
+	bottom: 0;
 	display: flex;
 }
 
