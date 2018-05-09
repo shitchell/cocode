@@ -30,19 +30,32 @@
 	<link rel="stylesheet" href="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.css" />
 	<script src="https://cdn.firebase.com/libs/firepad/1.4.0/firepad.min.js"></script>
 	
+	<!-- Toastr -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	
+	<!-- Custom stuffs -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<link rel="stylesheet" href="css/editor.css" />
+	<link rel="stylesheet" href="css/firepad-userlist.css" />
+	<script src="js/editor.js"></script>
+	<script src="js/firepad-userlist.js"></script>
 
 </head>
 
 <body>
 	<header>
 		<span id="site-title">cocode</span>
+		
+		<ul id="buttons">
+			<li id="users">users <span id="user-count"></span></li>
+			<div id="user-list"></div>
+		</ul>
 	</header>
 	
 	<content>
 		<div id="firepad-container"></div>
 		<iframe id="result-container"></iframe>
-		<script src="js/editor.js"></script>
 	</content>
 </body>
 </html>

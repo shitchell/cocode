@@ -2,21 +2,56 @@ var editor = null;
 var editor_theme = 'vibrant_ink';
 var editor_mode = 'html';
 var initEditor = initCodeMirror;
+var firepadUserList = null;
 var firepadFrom = null;
 var firepadRef = null;
 var firepad;
+var user_
 
 function init() {
+	initFirebase();
+	firepadRef = getDatabaseRef();
 	initEditor();
+	firebase.auth().onAuthStateChanged(function(user) {
+		user_ = user;
+		if (!user) {
+			firebase.auth().signInAnonymously().then(function() {
+	firepad = initFirepad(firepadRef, editor);
+				firepad.on('ready', function() {
+					initUserList(firebase.auth().currentUser);
+				});
+			});
+		} else {
+	firepad = initFirepad(firepadRef, editor);
+			firepad.on('ready', function() {
+				initUserList(user);
+			});
+		}
+	});
+}
+
+function initUserList(user) {
+	users = firepadRef.child('users');
+	firepadUserList = FirepadUserList.fromDiv(users, document.getElementById('user-list'), user.uid, user.displayName);
+	firepadUserList.onNameChange = function(oldName, newName) {
+		toastr.info(oldName + " is now known as " + newName)
+	};
+}
+
+function initFirebase() {
 	var config = {
 		apiKey: "AIzaSyBz_UWzwrJX9OaJHirz2Phu2zXRkqglR64",
 		databaseURL: "firepad-c7916.firebaseio.com"
 	}
 	firebase.initializeApp(config);
-	firepadRef = getDatabaseRef();
-	firepad = firepadFrom(firepadRef, editor, {
-		defaultText: '<h3>Hello World!</h3>'
+}
+
+function initFirepad(ref, editor) {
+	firepad = firepadFrom(ref, editor, {
+		defaultText: '<h3>Hello World!</h3>',
+//		userId: user.id
 	});
+	return firepad;
 }
 
 function initCodeMirror() {
@@ -96,10 +131,23 @@ function getDatabaseRef() {
 	return ref;
 }
 
+function getUser() {
+	console.log("firebase: ", firebase);
+	if (!firebase.auth().currentUser) {
+		firebase.auth().signInAnonymously();
+	}
+	
+	return firebase.auth().currentUser;
+}
+
 $(document).ready(function() {
 	init();
-	
-	$("#navicon").click(function(event) {
-		event.stopPropogation();
+	$("#users").click(function() {
+		$("#user-list").toggleClass("visible");
 	});
+	toastr.options = {
+		closeButton: true,
+		newestOnTop: false,
+		positionClass: 'toast-bottom-right'
+	};
 });
