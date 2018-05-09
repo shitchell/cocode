@@ -16,13 +16,13 @@ function init() {
 		user_ = user;
 		if (!user) {
 			firebase.auth().signInAnonymously().then(function() {
-	firepad = initFirepad(firepadRef, editor);
+				firepad = initFirepad(firepadRef, editor, user);
 				firepad.on('ready', function() {
 					initUserList(firebase.auth().currentUser);
 				});
 			});
 		} else {
-	firepad = initFirepad(firepadRef, editor);
+			firepad = initFirepad(firepadRef, editor, user);
 			firepad.on('ready', function() {
 				initUserList(user);
 			});
@@ -34,7 +34,9 @@ function initUserList(user) {
 	users = firepadRef.child('users');
 	firepadUserList = FirepadUserList.fromDiv(users, document.getElementById('user-list'), user.uid, user.displayName);
 	firepadUserList.onNameChange = function(oldName, newName) {
-		toastr.info(oldName + " is now known as " + newName)
+		if (oldName !== newName) {
+			toastr.info(oldName + " is now known as " + newName);
+		}
 	};
 }
 
@@ -46,10 +48,10 @@ function initFirebase() {
 	firebase.initializeApp(config);
 }
 
-function initFirepad(ref, editor) {
+function initFirepad(ref, editor, user) {
 	firepad = firepadFrom(ref, editor, {
 		defaultText: '<h3>Hello World!</h3>',
-//		userId: user.id
+		userId: user.uid
 	});
 	return firepad;
 }
