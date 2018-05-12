@@ -108,7 +108,9 @@ function initACE() {
 }
 
 function updateIframe(editor) {
-	var doc = document.getElementById("result-container").contentWindow.document;
+	var iframe = document.getElementById("result-container");
+	iframe.src += ''; // Reload the iframe
+	var doc = iframe.contentWindow.document;
 	doc.open();
 	doc.write(editor.getValue());
 	doc.close();
