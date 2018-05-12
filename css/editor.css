@@ -79,14 +79,18 @@ content {
 	display: flex;
 }
 
+.firepad {
+	flex: 1;
+}
+
 #firepad-container {
-	width: 50%;
+	width: 100%;
 	height: 100%;
 	box-sizing: border-box;
 }
 
 #result-container {
-	width: 50%;
+	flex: 1;
 	height: 100%;
 	box-sizing: border-box;
 	border: none;

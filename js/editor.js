@@ -1,7 +1,7 @@
 var editor = null;
 var editor_theme = 'vibrant_ink';
 var editor_mode = 'html';
-var initEditor = initCodeMirror;
+var initEditor = initACE;
 var firepadUserList = null;
 var firepadFrom = null;
 var firepadRef = null;
@@ -75,12 +75,11 @@ function initCodeMirror() {
 }
 
 function initACE() {
+	editor = ace.edit("firepad-container");
 	ace.require("ace/ext/language_tools");
 	ace.require("ace/ext/spellcheck");
 	ace.require("ace/ext/themelist");
-	ace.require("ace/ext/settings_menu");
-	ace.require("ace/ext/statusbar");
-	editor = ace.edit("firepad-container");
+	ace.require("ace/ext/settings_menu").init(editor);
 	editor.setOptions({
 		mode: "ace/mode/html",
 		theme: "ace/theme/vibrant_ink",
