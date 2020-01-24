@@ -6,7 +6,7 @@ var firepadUserList = null;
 var firepadFrom = null;
 var firepadRef = null;
 var firepad;
-var user_
+var user_;
 
 function init() {
 	initFirebase();
@@ -19,12 +19,19 @@ function init() {
 				firepad = initFirepad(firepadRef, editor, user);
 				firepad.on('ready', function() {
 					initUserList(firebase.auth().currentUser);
+					// Resize editor after loaded
+					if (initEditor === initACE) {
+						editor.resize();
+					}
 				});
 			});
 		} else {
 			firepad = initFirepad(firepadRef, editor, user);
 			firepad.on('ready', function() {
 				initUserList(user);
+				if (initEditor === initACE) {
+					editor.resize();
+				}
 			});
 		}
 	});
