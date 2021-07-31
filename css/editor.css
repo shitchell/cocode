@@ -28,12 +28,12 @@ header {
 }
 
 #names, #document-name-wrapper {
-    display: flex;
-    font-size: 0 !important;
+	display: flex;
+	font-size: 0 !important;
 }
 #names > *,
 #document-name-wrapper > * {
-    font-size: 1rem;
+	font-size: 1rem;
 }
 
 #site-title {
@@ -41,22 +41,22 @@ header {
 }
 
 #document-name-wrapper {
-    font-size: 1rem;
+	font-size: 1rem;
 }
 
 #document-name {
-    background: none;
-    border: none;
-    color: inherit;
-    font: inherit;
-    font-size: 1rem;
-    padding: 0;
-    margin: 0;
+	background: none;
+	border: none;
+	color: inherit;
+	font: inherit;
+	font-size: 1rem;
+	padding: 0;
+	margin: 0;
 }
 #document-name:focus,
 #document-name:hover {
-    outline: none;
-    border-bottom: 1px solid #0F0;
+	outline: none;
+	border-bottom: 1px solid #0F0;
 }
 
 #buttons {
@@ -129,5 +129,21 @@ content {
 }
 
 .toast {
-	background-color: #666;
+	background-color: #369;
+}
+
+/*
+ * Full screen on mobile devices
+ */
+@media only screen and (max-width: 768px) {
+	#result-container {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 9001;
+		width: 100vw;
+		background-color: white;
+	}
 }

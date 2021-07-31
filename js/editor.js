@@ -143,15 +143,15 @@ function updateIframe(editor) {
 }
 
 function updateWindowTitle() {
-    let iframe = document.getElementById("result-container");
+	let iframe = document.getElementById("result-container");
 	iframeTitle = iframe.contentDocument.title;
 	if (iframeTitle) {
-	    if (iframeTitle.length > 10) {
-	        iframeTitle = iframeTitle.substr(0, 10).trim() + "...";
-	    }
-	    document.title = `cc:${document_name} | ${iframeTitle}`;
+		if (iframeTitle.length > 10) {
+			iframeTitle = iframeTitle.substr(0, 10).trim() + "...";
+		}
+		document.title = `cc:${document_name} | ${iframeTitle}`;
 	} else {
-	    document.title = "cocode:" + document_name
+		document.title = "cocode:" + document_name
 	}
 }
 
