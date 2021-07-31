@@ -67,7 +67,7 @@ function initUserList(user) {
 }
 
 function initFirebase() {
-	var config = {
+	let config = {
 		apiKey: "AIzaSyBz_UWzwrJX9OaJHirz2Phu2zXRkqglR64",
 		databaseURL: "firepad-c7916.firebaseio.com"
 	}
@@ -156,7 +156,7 @@ function updateWindowTitle() {
 }
 
 function getDatabaseRef() {
-	var ref = firebase.database().ref();
+	let ref = firebase.database().ref();
 	document_name = window.location.search.replace(/^\?/, '');
 	console.log('[getDatabaseRef()] document_name: ' + document_name);
 	
