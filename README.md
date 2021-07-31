@@ -1,2 +1,5 @@
-# GitCollaborative
-Real time, collaborative project editing with git integration
+# CoCode
+
+Realtime collaborative HTML editing with live previews.
+
+https://shitchell.github.io/cocode/#osama
