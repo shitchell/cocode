@@ -147,7 +147,7 @@ function updateWindowTitle() {
 	iframeTitle = iframe.contentDocument.title;
 	if (iframeTitle) {
 		if (iframeTitle.length > 10) {
-			iframeTitle = iframeTitle.substr(0, 10).trim() + "...";
+			iframeTitle = iframeTitle.substr(0, 20).trim() + "...";
 		}
 		document.title = `cc:${document_name} | ${iframeTitle}`;
 	} else {
