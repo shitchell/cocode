@@ -16,7 +16,7 @@ var defaultText = `<!doctype html>
 	<title>My Awesome Page</title>
 	<style>
 		body {
-			background-color: #369;
+			background-color: 1369;
 			color: white;
 			font-family: sans;
 		}
@@ -133,12 +133,26 @@ function initACE() {
 }
 
 function updateIframe(editor) {
-	var iframe = document.getElementById("result-container");
+	let iframe = document.getElementById("result-container");
 	iframe.src += ''; // Reload the iframe
-	var doc = iframe.contentWindow.document;
+	let doc = iframe.contentWindow.document;
 	doc.open();
 	doc.write(editor.getValue());
 	doc.close();
+	updateWindowTitle();
+}
+
+function updateWindowTitle() {
+    let iframe = document.getElementById("result-container");
+	iframeTitle = iframe.contentDocument.title;
+	if (iframeTitle) {
+	    if (iframeTitle.length > 10) {
+	        iframeTitle = iframeTitle.substr(0, 10).trim() + "...";
+	    }
+	    document.title = `cc:${document_name} | ${iframeTitle}`;
+	} else {
+	    document.title = "cocode:" + document_name
+	}
 }
 
 function getDatabaseRef() {
@@ -171,7 +185,7 @@ function getDatabaseRef() {
 function updateName() {
 	document_name = window.location.search.replace(/^\?/, '') || default_name;
 	document.getElementById('document-name').value = document_name;
-	document.title = "cocode:" + document_name
+	updateWindowTitle();
 	console.log('[updateName()] ' + document_name);
 }
 
