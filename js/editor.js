@@ -140,19 +140,39 @@ function updateIframe(editor) {
 	doc.write(editor.getValue());
 	doc.close();
 	updateWindowTitle();
+	updateFavicon();
 }
 
+// Update the window title based on the iframe title
 function updateWindowTitle() {
 	let iframe = document.getElementById("result-container");
 	iframeTitle = iframe.contentDocument.title;
 	if (iframeTitle) {
-		if (iframeTitle.length > 10) {
+		if (iframeTitle.length > 20) {
 			iframeTitle = iframeTitle.substr(0, 20).trim() + "...";
 		}
 		document.title = `cc:${document_name} | ${iframeTitle}`;
 	} else {
 		document.title = "cocode:" + document_name
 	}
+}
+
+// Update the window favicon based on the iframe favicon
+function updateFavicon() {
+	let iframe = document.getElementById("result-container");
+    favicons = iframe.contentDocument.querySelectorAll("link[rel=icon]")
+    console.log("[updateFavicon()] found favicons:", favicons);
+    if (favicons.length > 0) {
+        // get existing favicon to update
+        let link = document.querySelector("link[rel~='icon']");
+        if (!link) {
+            // if none found, create one
+            link = document.createElement("link");
+            link.rel = "icon";
+        }
+        link.href = favicons[0].href;
+        document.getElementsByTagName("head")[0].appendChild(link);
+    }
 }
 
 function getDatabaseRef() {
@@ -183,6 +203,7 @@ function getDatabaseRef() {
 	return ref;
 }
 
+// Update the document_name var
 function updateName() {
 	document_name = window.location.search.replace(/^\?/, '').toLowerCase() || default_name;
 	document.getElementById('document-name').value = document_name;
