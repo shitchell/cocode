@@ -10,7 +10,7 @@ var firepadRef = null;
 var firepad;
 var user_;
 
-var defaultText = `<!DOCTYPE html>
+var defaultText = `<!doctype html>
 <html>
 <head>
 	<title>My Awesome Page</title>
