@@ -23,7 +23,7 @@ var defaultText = `<!doctype html>
 	</style>
 </head>
 <body>
-	<h3>It really works!</h3>
+	<h3>It works!</h3>
 </body>
 </html>
 `
