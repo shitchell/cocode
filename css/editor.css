@@ -135,7 +135,7 @@ content {
 /*
  * Full screen on mobile devices
  */
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 768px) {
 	#result-container {
 		position: absolute;
 		top: 0;
