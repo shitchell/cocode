@@ -85,10 +85,10 @@ header {
 		-2px 1px 5px rgba(0, 0, 0, 0.2);
 	
 	transition-property: bottom;
-	-webkit-transition: 500ms ease-in-out;
-	-moz-transition: 500ms ease-in-out;
-	-o-transition: 500ms ease-in-out;
-	transition: 500ms ease-in-out;
+	-webkit-transition: 300ms ease-in-out;
+	-moz-transition: 300ms ease-in-out;
+	-o-transition: 300ms ease-in-out;
+	transition: 300ms ease-in-out;
 }
 
 #user-list.visible {
