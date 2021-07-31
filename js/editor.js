@@ -1,3 +1,5 @@
+var default_name = "demo";
+var document_name = null;
 var editor = null;
 var editor_theme = 'vibrant_ink';
 var editor_mode = 'html';
@@ -8,6 +10,23 @@ var firepadRef = null;
 var firepad;
 var user_;
 
+var defaultText = `<!DOCTYPE html>
+<html>
+<head>
+	<title>My Awesome Page</title>
+	<style>
+		body {
+			background-color: #369;
+			color: white;
+			font-family: sans;
+		}
+	</style>
+</head>
+<body>
+	<h3>It really works!</h3>
+</body>
+</html>
+`
 function init() {
 	initFirebase();
 	firepadRef = getDatabaseRef();
@@ -57,7 +76,7 @@ function initFirebase() {
 
 function initFirepad(ref, editor, user) {
 	firepad = firepadFrom(ref, editor, {
-		defaultText: '<h3>Hello World!</h3>',
+		defaultText: defaultText,
 		userId: user.uid
 	});
 	return firepad;
@@ -124,14 +143,22 @@ function updateIframe(editor) {
 
 function getDatabaseRef() {
 	var ref = firebase.database().ref();
-	var hash = window.location.hash.replace(/#/g, '');
+	document_name = window.location.search.replace(/^\?/, '');
+	console.log('[getDatabaseRef()] document_name: ' + document_name);
 	
-	if (hash) {
-		ref = ref.child(hash);
+	if (document_name) {
+		ref = ref.child(document_name);
 	} else {
-		//ref = ref.push(); // Generate unique hash
-		ref = ref.child("demo");
-		window.location.hash = "#demo";
+		// use default
+		document_name = default_name;
+		ref = ref.child(default_name);
+
+		// redirect to default
+		// console.log('[getDatabaseRef()] redirecting to default')
+		// window.location.search = "?" + default_name;
+
+		// generate unique hash
+		//ref = ref.push();
 	}
 	
 	if (typeof console !== 'undefined') {
@@ -139,6 +166,13 @@ function getDatabaseRef() {
 	}
 	
 	return ref;
+}
+
+function updateName() {
+	document_name = window.location.search.replace(/^\?/, '') || default_name;
+	document.getElementById('document-name').value = document_name;
+	document.title = "cocode:" + document_name
+	console.log('[updateName()] ' + document_name);
 }
 
 function getUser() {
@@ -150,11 +184,32 @@ function getUser() {
 	return firebase.auth().currentUser;
 }
 
+function switchDocument(e) {
+	// prevent form submission
+	e.preventDefault();
+
+	let name = document.getElementById('document-name').value;
+	console.log("switching to: " + name);
+	window.location.search = "?" + name;
+}
+
 $(document).ready(function() {
+	// update the document name
+	updateName();
+
+	// setup the document switcher
+	$("#name-form").submit(switchDocument);
+
+	// start firepad
+	console.log('[document.ready] init');
 	init();
+	console.log('[document.ready] init complete');
+
+	// make user list toggleable
 	$("#users").click(function() {
 		$("#user-list").toggleClass("visible");
 	});
+
 	toastr.options = {
 		closeButton: true,
 		newestOnTop: false,

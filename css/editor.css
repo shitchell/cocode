@@ -24,11 +24,39 @@ header {
 	color: white;
 	padding: 0 1.5em;
 	box-sizing: border-box;
-	border-bottom: 3px solid #666;
+	border-bottom: 3px solid #369;
+}
+
+#names, #document-name-wrapper {
+    display: flex;
+    font-size: 0 !important;
+}
+#names > *,
+#document-name-wrapper > * {
+    font-size: 1rem;
 }
 
 #site-title {
 	color: #0F0;
+}
+
+#document-name-wrapper {
+    font-size: 1rem;
+}
+
+#document-name {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    font-size: 1rem;
+    padding: 0;
+    margin: 0;
+}
+#document-name:focus,
+#document-name:hover {
+    outline: none;
+    border-bottom: 1px solid #0F0;
 }
 
 #buttons {

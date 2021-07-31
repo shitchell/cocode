@@ -2,6 +2,8 @@
 <!-- See http://www.firepad.io/docs/ for detailed embedding docs. -->
 <html>
 <head>
+    <title>cocode</title>
+
 	<meta charset="utf-8" />
 	
 	<!-- jQuery -->
@@ -38,7 +40,15 @@
 
 <body>
 	<header>
-		<span id="site-title">cocode</span>
+	    <div id="names">
+    		<span id="site-title">cocode</span>
+    		<div id="document-name-wrapper">
+        		<span id="hash">:</span>
+        		<form id="name-form">
+            		<input id="document-name" type="text" value="..." placeholder="switch to..."/>
+            	</form>
+        	</div>
+    	</div>
 		
 		<ul id="buttons">
 			<li id="users">users <span id="user-count"></span></li>
