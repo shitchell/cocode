@@ -80,6 +80,7 @@ header {
 	right: 10px;
 	z-index: 9001;
 	height: 300px;
+	max-height: calc(100vh - 50px); /* don't overlap header */
 	box-shadow: 0 0 3px rgba(0, 0, 0, 0.4),
 		-2px 1px 5px rgba(0, 0, 0, 0.2);
 	
