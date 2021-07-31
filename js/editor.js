@@ -16,7 +16,7 @@ var defaultText = `<!doctype html>
 	<title>My Awesome Page</title>
 	<style>
 		body {
-			background-color: 1369;
+			background-color: #369;
 			color: white;
 			font-family: sans;
 		}
@@ -158,6 +158,7 @@ function updateWindowTitle() {
 function getDatabaseRef() {
 	let ref = firebase.database().ref();
 	document_name = window.location.search.replace(/^\?/, '');
+	document_name = document_name.toLowerCase();
 	console.log('[getDatabaseRef()] document_name: ' + document_name);
 	
 	if (document_name) {
@@ -183,7 +184,7 @@ function getDatabaseRef() {
 }
 
 function updateName() {
-	document_name = window.location.search.replace(/^\?/, '') || default_name;
+	document_name = window.location.search.replace(/^\?/, '').toLowerCase() || default_name;
 	document.getElementById('document-name').value = document_name;
 	updateWindowTitle();
 	console.log('[updateName()] ' + document_name);
@@ -202,7 +203,7 @@ function switchDocument(e) {
 	// prevent form submission
 	e.preventDefault();
 
-	let name = document.getElementById('document-name').value;
+	let name = document.getElementById('document-name').value.toLowerCase();
 	console.log("switching to: " + name);
 	window.location.search = "?" + name;
 }
