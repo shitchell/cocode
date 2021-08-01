@@ -202,7 +202,7 @@ function setFavicons(urlArray) {
 	
 	// create and add favicons
 	urlArray.forEach(function(url) {
-		let link = $("<link>");
+		let link = document.createElement("link");
 		link.rel = "icon";
 		link.href = url;
 		$("head").append(link);
