@@ -1,5 +1,6 @@
 var default_name = "demo";
 var document_name = null;
+var invalidDocumentRegx = /[^A-z0-9 ]/g;
 var editor = null;
 var editor_theme = 'vibrant_ink';
 var editor_mode = 'html';
@@ -237,9 +238,16 @@ function getDatabaseRef() {
 	return ref;
 }
 
+// create a valid document name
+function sanitizeDocumentName(name) {
+	// only allow letters/numbers and replace spaces with '-'
+	return name.replaceAll(' ', '-').replace(invalidDocumentRegx, '');
+}
+
 // Update the document_name var
 function updateName() {
 	document_name = window.location.search.replace(/^\?/, '').toLowerCase() || default_name;
+	document_name = sanitizeDocumentName(document_name);
 	document.getElementById('document-name').value = document_name;
 	updateWindowTitle();
 	$(".document-name").text("." + document_name);
@@ -260,6 +268,10 @@ function switchDocument(e) {
 	e.preventDefault();
 
 	let name = document.getElementById('document-name').value.toLowerCase();
+
+	// remove funky characters from the document name
+	name = sanitizeDocumentName(name);
+
 	console.log("switching to: " + name);
 	window.location.search = "?" + name;
 }
