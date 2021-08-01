@@ -4,10 +4,15 @@ var editor = null;
 var editor_theme = 'vibrant_ink';
 var editor_mode = 'html';
 var initEditor = initACE;
+// track favicons to reduce number of times replacing them
+var faviconsCurrent = [];
+var faviconsIframe = [];
+var faviconsWindow = [];
 var firepadUserList = null;
 var firepadFrom = null;
 var firepadRef = null;
 var firepad;
+var iframe;
 var user_;
 
 var defaultText = `<!doctype html>
@@ -26,7 +31,8 @@ var defaultText = `<!doctype html>
 	<h3>It works!</h3>
 </body>
 </html>
-`
+`;
+
 function init() {
 	initFirebase();
 	firepadRef = getDatabaseRef();
@@ -137,19 +143,17 @@ function initACE() {
 }
 
 function updateIframe(editor) {
-	let iframe = document.getElementById("result-container");
 	iframe.src += ''; // Reload the iframe
 	let doc = iframe.contentWindow.document;
 	doc.open();
 	doc.write(editor.getValue());
 	doc.close();
 	updateWindowTitle();
-	updateFavicon();
+	updateFavicons();
 }
 
 // Update the window title based on the iframe title
 function updateWindowTitle() {
-	let iframe = document.getElementById("result-container");
 	iframeTitle = iframe.contentDocument.title;
 	if (iframeTitle) {
 		if (iframeTitle.length > 20) {
@@ -157,26 +161,52 @@ function updateWindowTitle() {
 		}
 		document.title = `cc:${document_name} | ${iframeTitle}`;
 	} else {
-		document.title = "cocode:" + document_name
+		document.title = "cocode:" + document_name;
 	}
 }
 
-// Update the window favicon based on the iframe favicon
-function updateFavicon() {
-	let iframe = document.getElementById("result-container");
-	favicons = iframe.contentDocument.querySelectorAll("link[rel=icon]")
-	console.log("[updateFavicon()] found favicons:", favicons);
-	if (favicons.length > 0) {
-		// get existing favicon to update
-		let link = document.querySelector("link[rel~='icon']");
-		if (!link) {
-			// if none found, create one
-			link = document.createElement("link");
-			link.rel = "icon";
+// Use favicons from the iframe if available, else use the default favicons
+function updateFavicons() {
+	faviconsIframe = $(iframe).contents().find("link[rel=icon]").map((i, el) => el.href).toArray();
+	let updatedFavicons = null;
+	if (faviconsIframe.length > 0) {
+		// found favicons in the iframe, now check if we're already using them
+		if (faviconsIframe.toString() !== faviconsCurrent.toString()) {
+			// they don't match the current favicons, so update
+			updatedFavicons = faviconsIframe;
+			console.log("[updateFavicons()] updating to iframe favicons");
 		}
-		link.href = favicons[0].href;
-		document.getElementsByTagName("head")[0].appendChild(link);
+	} else if (faviconsCurrent.toString() !== faviconsWindow.toString()) {
+		// since there are no iframe favicons, use the default ones,
+		// but only if we're not already using them
+		updatedFavicons = faviconsWindow;
+		console.log("[updateFavicons()] updating to default favicons");
 	}
+
+	if (updatedFavicons !== null) {
+		setFavicons(updatedFavicons);
+		faviconsCurrent = updatedFavicons;
+		console.log("[updateFavicons()", faviconsCurrent);
+	}
+}
+
+// Save each href from each favicon found at startup
+function saveFavicons() {
+	faviconsWindow = $("link[rel=icon]").map((i, el) => el.href).toArray();
+}
+
+// Replace any current favicons with those generated from an array of urls
+function setFavicons(urlArray) {
+	// remove current favicons
+	$("link[rel=icon]").remove();
+	
+	// create and add favicons
+	urlArray.forEach(function(url) {
+		let link = $("<link>");
+		link.rel = "icon";
+		link.href = url;
+		$("head").append(link);
+	});
 }
 
 function getDatabaseRef() {
@@ -221,7 +251,7 @@ function getUser() {
 	if (!firebase.auth().currentUser) {
 		firebase.auth().signInAnonymously();
 	}
-	
+
 	return firebase.auth().currentUser;
 }
 
@@ -235,6 +265,12 @@ function switchDocument(e) {
 }
 
 $(document).ready(function() {
+	// set the iframe
+	iframe = document.getElementById("result-container");
+
+	// get the current/default favicons
+	saveFavicons();
+
 	// update the document name
 	updateName();
 
