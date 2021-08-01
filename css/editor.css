@@ -4,7 +4,7 @@ html {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-size: 16px;
+	font-size: 1.1em;
 }
 
 body {
@@ -15,16 +15,15 @@ body {
 }
 
 header {
-	height: 50px;
+	height: 3.5em;
 	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	background: black;
+	background: #1a1a1a;
 	color: white;
-	padding: 0 1.5em;
+	padding: 0 2em;
 	box-sizing: border-box;
-	border-bottom: 3px solid #369;
 }
 
 #names, #document-name-wrapper {
@@ -52,6 +51,8 @@ header {
 	font-size: 1rem;
 	padding: 0;
 	margin: 0;
+	width: 7em;
+	text-overflow: ellipsis;
 }
 #document-name:focus,
 #document-name:hover {
@@ -67,11 +68,21 @@ header {
 #buttons li {
 	margin-left: 1em;
 	font-family: Roboto, sans-serif;
+	color: #CCC;
 }
-
 #buttons li:hover {
-	text-decoration: underline;
 	cursor: pointer;
+	color: #FFF;
+}
+i[class="fas fa-cog"] {
+	transition-property: transform;
+	-webkit-transition: 300ms ease-in-out;
+	-moz-transition: 300ms ease-in-out;
+	-o-transition: 300ms ease-in-out;
+	transition: 300ms ease-in-out;
+}
+i[class="fas fa-cog"]:hover {
+    transform: rotate(90deg);
 }
 
 #user-list {
