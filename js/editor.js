@@ -212,8 +212,6 @@ function setFavicons(urlArray) {
 
 function getDatabaseRef() {
 	let ref = firebase.database().ref();
-	document_name = window.location.search.replace(/^\?/, '');
-	document_name = document_name.toLowerCase();
 	console.log('[getDatabaseRef()] document_name: ' + document_name);
 	
 	if (document_name) {
