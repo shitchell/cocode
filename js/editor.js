@@ -42,6 +42,8 @@ function init() {
 					if (initEditor === initACE) {
 						editor.resize();
 					}
+					// Hide loading modal
+					$("#loading-modal").fadeOut();
 				});
 			});
 		} else {
@@ -51,6 +53,8 @@ function init() {
 				if (initEditor === initACE) {
 					editor.resize();
 				}
+				// Hide loading modal
+				$("#loading-modal").fadeOut();
 			});
 		}
 	});
@@ -208,6 +212,7 @@ function updateName() {
 	document_name = window.location.search.replace(/^\?/, '').toLowerCase() || default_name;
 	document.getElementById('document-name').value = document_name;
 	updateWindowTitle();
+	$(".document-name").text("." + document_name);
 	console.log('[updateName()] ' + document_name);
 }
 

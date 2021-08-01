@@ -4,18 +4,20 @@ html {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-size: 1.1em;
+	font-size: 1.2em;
 }
 
 body {
 	margin: 0;
 	height: 100%;
 	position: relative;
+	display: flex;
+	flex-direction: column;
 	font-family: monospace;
 }
 
 header {
-	height: 3.5em;
+	height: 3rem;
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -35,34 +37,25 @@ header {
 
 #names, #document-name-wrapper {
 	display: flex;
-	font-size: 0 !important;
-}
-#names > *,
-#document-name-wrapper > * {
-	font-size: 1rem;
 }
 
 #site-title {
 	color: #0F0;
 }
 
-#document-name-wrapper {
-	font-size: 1rem;
-}
-
-#document-name {
+input#document-name {
 	background: none;
 	border: none;
 	color: inherit;
 	font: inherit;
-	font-size: 1rem;
 	padding: 0;
 	margin: 0;
 	width: 7em;
 	text-overflow: ellipsis;
+	box-sizing: border-box;
 }
-#document-name:focus,
-#document-name:hover {
+input#document-name:focus,
+input#document-name:hover {
 	outline: none;
 	border-bottom: 1px solid #0F0;
 }
@@ -120,35 +113,57 @@ i[class="fas fa-cog"]:hover {
 }
 
 content {
-	position: absolute;
-	top: 3.5em;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	display: flex;
+    flex-basis: 100%;
+    position: relative;
+}
 
-	transition-property: top;
-	-webkit-transition: 300ms ease-in-out;
-	-moz-transition: 300ms ease-in-out;
-	-o-transition: 300ms ease-in-out;
-	transition: 300ms ease-in-out;
+#loading-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #FFF;
+    z-index: 90001;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
 }
 
 .firepad {
-	flex: 1;
+    position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+    width: 50vw;
 }
 
 #firepad-container {
-	width: 100%;
+    width: 100%;
 	height: 100%;
 	box-sizing: border-box;
 }
 
 #result-container {
-	flex: 1;
+    background-color: white;
+    z-index: 9000;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 50vw;
+    width: 50vw;
 	height: 100%;
 	box-sizing: border-box;
 	border: none;
+
+	transition-property: left, width;
+	-webkit-transition: 300ms ease-in-out;
+	-moz-transition: 300ms ease-in-out;
+	-o-transition: 300ms ease-in-out;
+	transition: 300ms ease-in-out;
 }
 
 .cm-s-ambiance .CodeMirror-linenumber {
@@ -174,20 +189,11 @@ body.fullscreen #fs-expand {
     display: none;
 }
 body.fullscreen #result-container {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
-    z-index: 9000;
     width: 100vw;
-    background-color: white;
 }
 body.fullscreen header {
-    height: 2em;
-}
-body.fullscreen content {
-    top: 2em;
+    height: 2rem;
 }
 
 /*
@@ -203,5 +209,9 @@ body.fullscreen content {
 		z-index: 9000;
 		width: 100vw;
 		background-color: white;
+	}
+	/* since we're already fullscreen... */
+	.fullscreen-toggle {
+	    display: none;
 	}
 }
