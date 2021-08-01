@@ -17,7 +17,7 @@ body {
 }
 
 header {
-	height: 3rem;
+	height: 2.5rem;
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -28,11 +28,6 @@ header {
 	box-sizing: border-box;
 
 	transition-property: height;
-	-webkit-transition: 300ms ease-in-out;
-	-moz-transition: 300ms ease-in-out;
-	-o-transition: 300ms ease-in-out;
-	transition: 300ms ease-in-out;
-
 }
 
 #names, #document-name-wrapper {
@@ -46,6 +41,7 @@ header {
 input#document-name {
 	background: none;
 	border: none;
+	border-bottom: 1px solid rgba(0, 255, 0, 0);
 	color: inherit;
 	font: inherit;
 	padding: 0;
@@ -53,11 +49,14 @@ input#document-name {
 	width: 7em;
 	text-overflow: ellipsis;
 	box-sizing: border-box;
+
+	transition-property: border-color;
+	transition-duration: 100ms;
 }
 input#document-name:focus,
 input#document-name:hover {
 	outline: none;
-	border-bottom: 1px solid #0F0;
+	border-color: rgba(0, 255, 0, 1);
 }
 
 #buttons {
@@ -66,23 +65,23 @@ input#document-name:hover {
 	padding: 0;
 }
 
-#buttons li,
-#buttons a {
+#buttons li {
 	margin-left: 1em;
 	font-family: Roboto, sans-serif;
-	color: #CCC;
 }
-#buttons li:hover,
+#buttons li,
+#buttons a {
+	color: #AAA;
+}
+#buttons a {
+	transition-property: color;
+}
 #buttons a:hover {
 	cursor: pointer;
 	color: #FFF;
 }
 i[class="fas fa-cog"] {
 	transition-property: transform;
-	-webkit-transition: 300ms ease-in-out;
-	-moz-transition: 300ms ease-in-out;
-	-o-transition: 300ms ease-in-out;
-	transition: 300ms ease-in-out;
 }
 i[class="fas fa-cog"]:hover {
 	transform: rotate(90deg);
@@ -99,10 +98,6 @@ i[class="fas fa-cog"]:hover {
 		-2px 1px 5px rgba(0, 0, 0, 0.2);
 	
 	transition-property: bottom;
-	-webkit-transition: 300ms ease-in-out;
-	-moz-transition: 300ms ease-in-out;
-	-o-transition: 300ms ease-in-out;
-	transition: 300ms ease-in-out;
 }
 
 #user-list.visible {
@@ -161,10 +156,6 @@ content {
 	border: none;
 
 	transition-property: left, width;
-	-webkit-transition: 300ms ease-in-out;
-	-moz-transition: 300ms ease-in-out;
-	-o-transition: 300ms ease-in-out;
-	transition: 300ms ease-in-out;
 }
 
 .cm-s-ambiance .CodeMirror-linenumber {
@@ -179,11 +170,24 @@ content {
 	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !important;
 }
 
-/*
+/**
+ * Helper classes
+ */
+
+/* added in the html, and the transition-property is defined in the css */
+.transition {
+	-webkit-transition: 300ms ease-in-out;
+	-moz-transition: 300ms ease-in-out;
+	-o-transition: 300ms ease-in-out;
+	transition: 300ms ease-in-out;
+}
+
+/**
  * Fullscreen iframe preview via
  * addthing the .fullscreen class
  * to the body
  */
+
 #fs-collapse {
 	display: none;
 }
@@ -198,12 +202,13 @@ body.fullscreen #result-container {
 	width: 100vw;
 }
 body.fullscreen header {
-	height: 2rem;
+	height: 1.8rem;
 }
 
-/*
+/**
  * Full screen on mobile devices
  */
+
 @media only screen and (max-width: 768px) {
 	#result-container {
 		position: absolute;

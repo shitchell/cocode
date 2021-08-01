@@ -43,30 +43,38 @@
 </head>
 
 <body>
-	<header>
+	<header class="transition">
 		<div id="names">
 			<div id="site-title">cocode</div>
 			<div id="document-name-wrapper">
 				<span id="hash">:</span>
 				<form id="name-form">
-					<input id="document-name" type="text" value="..." placeholder="switch to..."/>
+					<input id="document-name" class="transition" type="text" value="..." placeholder="switch to..." />
 				</form>
 			</div>
 		</div>
 		
 		<ul id="buttons">
-			<li id="github"><a title="View on GitHub" target="_blank" href="https://github.com/shitchell/cocode"><i class="fab fa-github"></i></a></li>
-			<li id="fs-expand" class="fullscreen-toggle"><i title="Fullscreen Preview" class="fas fa-expand"></i></li>
-			<li id="fs-collapse" class="fullscreen-toggle"><i title="Collapse Preview" class="fas fa-compress"></i></li>
-			<li id="users"><i title="Connected Users" class="fas fa-users"></i> <span id="user-count"></span></li>
-			<div id="user-list"></div>
+			<li>
+				<a class="transition" title="View on GitHub" target="_blank" href="https://github.com/shitchell/cocode"><i class="fab fa-github"></i></a>
+			</li>
+			<li id="fs-expand" class="fullscreen-toggle">
+				<a class="transition"><i title="Fullscreen Preview" class="fas fa-expand"></i></a>
+			</li>
+			<li id="fs-collapse" class="fullscreen-toggle">
+				<a class="transition"><i title="Collapse Preview" class="fas fa-compress"></i></a>
+			</li>
+			<li id="users">
+				<a class="transition"><i title="Connected Users" class="fas fa-users"></i></a> <span id="user-count"></span>
+			</li>
+			<div id="user-list" class="transition"></div>
 		</ul>
 	</header>
 	
 	<content>
 		<div id="loading-modal"><h3>connecting to firepad<span class="document-name"></span>...</h3></div>
 		<div id="firepad-container"></div>
-		<iframe id="result-container"></iframe>
+		<iframe id="result-container" class="transition"></iframe>
 	</content>
 </body>
 </html>
