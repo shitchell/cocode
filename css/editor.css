@@ -36,6 +36,7 @@ header {
 
 #site-title {
 	color: #0F0;
+	font-weight: bold;
 }
 
 input#document-name {
