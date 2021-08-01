@@ -164,19 +164,19 @@ function updateWindowTitle() {
 // Update the window favicon based on the iframe favicon
 function updateFavicon() {
 	let iframe = document.getElementById("result-container");
-    favicons = iframe.contentDocument.querySelectorAll("link[rel=icon]")
-    console.log("[updateFavicon()] found favicons:", favicons);
-    if (favicons.length > 0) {
-        // get existing favicon to update
-        let link = document.querySelector("link[rel~='icon']");
-        if (!link) {
-            // if none found, create one
-            link = document.createElement("link");
-            link.rel = "icon";
-        }
-        link.href = favicons[0].href;
-        document.getElementsByTagName("head")[0].appendChild(link);
-    }
+	favicons = iframe.contentDocument.querySelectorAll("link[rel=icon]")
+	console.log("[updateFavicon()] found favicons:", favicons);
+	if (favicons.length > 0) {
+		// get existing favicon to update
+		let link = document.querySelector("link[rel~='icon']");
+		if (!link) {
+			// if none found, create one
+			link = document.createElement("link");
+			link.rel = "icon";
+		}
+		link.href = favicons[0].href;
+		document.getElementsByTagName("head")[0].appendChild(link);
+	}
 }
 
 function getDatabaseRef() {
@@ -251,11 +251,11 @@ $(document).ready(function() {
 		$("#user-list").toggleClass("visible");
 	});
 
-    // enable expand/collapse buttons
-    $(".fullscreen-toggle").click(() => {
-        $("body").toggleClass("fullscreen");
-        console.log("fullscreen:", $("body").hasClass("fullscreen"));
-    });
+	// enable expand/collapse buttons
+	$(".fullscreen-toggle").click(() => {
+		$("body").toggleClass("fullscreen");
+		console.log("fullscreen:", $("body").hasClass("fullscreen"));
+	});
 
 	toastr.options = {
 		closeButton: true,

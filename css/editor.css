@@ -85,7 +85,7 @@ i[class="fas fa-cog"] {
 	transition: 300ms ease-in-out;
 }
 i[class="fas fa-cog"]:hover {
-    transform: rotate(90deg);
+	transform: rotate(90deg);
 }
 
 #user-list {
@@ -114,48 +114,48 @@ i[class="fas fa-cog"]:hover {
 }
 
 content {
-    flex-basis: 100%;
-    position: relative;
+	flex-basis: 100%;
+	position: relative;
 }
 
 #loading-modal {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #FFF;
-    z-index: 90001;
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #FFF;
+	z-index: 90001;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
 }
 
 .firepad {
-    position: absolute;
+	position: absolute;
 	top: 0;
 	left: 0;
 	bottom: 0;
-    width: 50vw;
+	width: 50vw;
 }
 
 #firepad-container {
-    width: 100%;
+	width: 100%;
 	height: 100%;
 	box-sizing: border-box;
 }
 
 #result-container {
-    background-color: white;
-    z-index: 9000;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 50vw;
-    width: 50vw;
+	background-color: white;
+	z-index: 9000;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 50vw;
+	width: 50vw;
 	height: 100%;
 	box-sizing: border-box;
 	border: none;
@@ -185,20 +185,20 @@ content {
  * to the body
  */
 #fs-collapse {
-    display: none;
+	display: none;
 }
 body.fullscreen #fs-collapse {
-    display: block;
+	display: block;
 }
 body.fullscreen #fs-expand {
-    display: none;
+	display: none;
 }
 body.fullscreen #result-container {
-    left: 0;
-    width: 100vw;
+	left: 0;
+	width: 100vw;
 }
 body.fullscreen header {
-    height: 2rem;
+	height: 2rem;
 }
 
 /*
@@ -218,11 +218,11 @@ body.fullscreen header {
 
 	/* reduce header padding to match default body in iframe */
 	header {
-	    padding: 0 0.5em;
+		padding: 0 0.5em;
 	}
 
 	/* since we're already fullscreen... */
 	.fullscreen-toggle {
-	    display: none;
+		display: none;
 	}
 }
