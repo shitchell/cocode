@@ -24,6 +24,13 @@ header {
 	color: white;
 	padding: 0 2em;
 	box-sizing: border-box;
+
+	transition-property: height;
+	-webkit-transition: 300ms ease-in-out;
+	-moz-transition: 300ms ease-in-out;
+	-o-transition: 300ms ease-in-out;
+	transition: 300ms ease-in-out;
+
 }
 
 #names, #document-name-wrapper {
@@ -65,12 +72,14 @@ header {
 	list-style: none;
 }
 
-#buttons li {
+#buttons li,
+#buttons a {
 	margin-left: 1em;
 	font-family: Roboto, sans-serif;
 	color: #CCC;
 }
-#buttons li:hover {
+#buttons li:hover,
+#buttons a:hover {
 	cursor: pointer;
 	color: #FFF;
 }
@@ -112,11 +121,17 @@ i[class="fas fa-cog"]:hover {
 
 content {
 	position: absolute;
-	top: 50px;
+	top: 3.5em;
 	left: 0;
 	right: 0;
 	bottom: 0;
 	display: flex;
+
+	transition-property: top;
+	-webkit-transition: 300ms ease-in-out;
+	-moz-transition: 300ms ease-in-out;
+	-o-transition: 300ms ease-in-out;
+	transition: 300ms ease-in-out;
 }
 
 .firepad {
@@ -142,6 +157,37 @@ content {
 
 .toast {
 	background-color: #333;
+}
+
+/*
+ * Fullscreen iframe preview via
+ * addthing the .fullscreen class
+ * to the body
+ */
+#fs-collapse {
+    display: none;
+}
+body.fullscreen #fs-collapse {
+    display: block;
+}
+body.fullscreen #fs-expand {
+    display: none;
+}
+body.fullscreen #result-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9000;
+    width: 100vw;
+    background-color: white;
+}
+body.fullscreen header {
+    height: 2em;
+}
+body.fullscreen content {
+    top: 2em;
 }
 
 /*

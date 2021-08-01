@@ -246,6 +246,12 @@ $(document).ready(function() {
 		$("#user-list").toggleClass("visible");
 	});
 
+    // enable expand/collapse buttons
+    $(".fullscreen-toggle").click(() => {
+        $("body").toggleClass("fullscreen");
+        console.log("fullscreen:", $("body").hasClass("fullscreen"));
+    });
+
 	toastr.options = {
 		closeButton: true,
 		newestOnTop: false,
