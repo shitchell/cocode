@@ -171,8 +171,12 @@ content {
 	color: #CCC;
 }
 
-.toast {
+#toast-container > div {
+	opacity: 0.95;
 	background-color: #333;
+	-webkit-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !important;
+	-moz-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !important;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !important;
 }
 
 /*
@@ -211,6 +215,12 @@ body.fullscreen header {
 		width: 100vw;
 		background-color: white;
 	}
+
+	/* reduce header padding to match default body in iframe */
+	header {
+	    padding: 0 0.5em;
+	}
+
 	/* since we're already fullscreen... */
 	.fullscreen-toggle {
 	    display: none;
