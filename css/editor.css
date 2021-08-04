@@ -145,7 +145,7 @@ content {
 
 #result-container {
 	background-color: white;
-	z-index: 9000;
+	z-index: 40;
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -183,6 +183,35 @@ content {
 	transition: 300ms ease-in-out;
 }
 
+/*
+ * Shadow profiles
+ * leaving these here while deciding
+ * which one i favor the most
+ */
+body.shadow-gh header {
+	box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
+	box-shadow: 0 0 0.25em rgb(0 0 0 / 28%), 0 0 0.5em rgb(0 0 0 / 35%);
+	z-index: 60;
+}
+body.shadow-gh #firepad-container > .ace_gutter {
+	box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
+	z-index: 65;
+}
+
+body.shadow-h header {
+	box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
+	z-index: 20;
+}
+
+body.shadow-i #result-container {
+	box-shadow: 0 -0.25em 0.5em rgb(0 0 0 / 16%), 0 -0.25em 0.5em rgb(0 0 0 / 23%);
+	z-index: 40;
+}
+
+body.shadow-c .ace_content {
+	box-shadow: inset 0 0 0.15em rgb(0 0 0 / 16%), inset 0 0 0.4em rgb(0 0 0 / 23%);
+}
+
 /**
  * Fullscreen iframe preview via
  * addthing the .fullscreen class
@@ -201,9 +230,11 @@ body.fullscreen #fs-expand {
 body.fullscreen #result-container {
 	left: 0;
 	width: 100vw;
+	z-index: 9001;
 }
 body.fullscreen header {
 	height: 1.8rem;
+	z-index: 9002;
 }
 
 /**
@@ -217,7 +248,7 @@ body.fullscreen header {
 		right: 0;
 		bottom: 0;
 		left: 0;
-		z-index: 9000;
+		z-index: 40;
 		width: 100vw;
 		background-color: white;
 	}
