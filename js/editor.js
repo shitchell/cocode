@@ -5,6 +5,7 @@ var editor = null;
 var editor_theme = 'vibrant_ink';
 var editor_mode = 'html';
 var initEditor = initACE;
+var updateCount = 0;
 // track favicons to reduce number of times replacing them
 var faviconsCurrent = [];
 var faviconsIframe = [];
@@ -98,7 +99,7 @@ function initCodeMirror() {
 		mode: "htmlmixed",
 		theme: "material",
 		smartIndent: false,
-		indentWithTabs: true,
+		indentWithTabs: false,
 		lineWrapping: true,
 		lineNumbers: true,
 		lineWiseCopyCut: false,
@@ -107,7 +108,10 @@ function initCodeMirror() {
 		autoCloseBrackets: true,
 		highlightSelectionMatches: true
 	});
-	editor.on('change', function() { updateIframe(editor); });
+	editor.on('change', function() {
+	    updateIframe(editor);
+	    displayShortcut();
+	});
 	firepadFrom = Firepad.fromCodeMirror;
 }
 
@@ -127,7 +131,8 @@ function initACE() {
 		wrapBehavioursEnabled: true,
 		wrap: true,
 		copyWithEmptySelection: false,
-		useSoftTabs: false,
+		useSoftTabs: true,
+		tabSize: 2,
 		hScrollBarAlwaysVisible: false,
 		vScrollBarAlwaysVisible: false,
 		animatedScroll: false,
@@ -135,11 +140,13 @@ function initACE() {
 		fontSize: 13,
 		fontFamily: "monospace",
 		newLineMode: "auto",
-		useSoftTabs: false,
 		enableLiveAutocompletion: true,
 		spellcheck: true
 	});
-	editor.getSession().on('change', function() { updateIframe(editor); });
+	editor.getSession().on('change', function() {
+	    updateIframe(editor);
+	    displayShortcut();
+	});
 	firepadFrom = Firepad.fromACE;
 }
 
@@ -151,6 +158,14 @@ function updateIframe(editor) {
 	doc.close();
 	updateWindowTitle();
 	updateFavicons();
+	updateCount++;
+}
+
+function displayShortcut() {
+    if (!localStorage["settingsShortcutDisplayed"] && updateCount > 1) {
+        toastr.info("<code>ctrl</code>+<code>,</code> for code editor settings");
+        localStorage["settingsShortcutDisplayed"] = true;
+    }
 }
 
 // Update the window title based on the iframe title
