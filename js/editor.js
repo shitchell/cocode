@@ -1,6 +1,7 @@
 var default_name = "demo";
 var document_name = null;
 var invalidDocumentRegx = /[^A-z0-9 ]/g;
+var beautify = null;
 var editor = null;
 var editor_theme = 'vibrant_ink';
 var editor_mode = 'html';
@@ -121,6 +122,7 @@ function initACE() {
 	ace.require("ace/ext/spellcheck");
 	ace.require("ace/ext/themelist");
 	ace.require("ace/ext/settings_menu").init(editor);
+	beautify = ace.require("ace/ext/beautify");
 	editor.setOptions({
 		mode: "ace/mode/html",
 		theme: "ace/theme/vibrant_ink",
