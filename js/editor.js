@@ -1,10 +1,10 @@
-var default_name = "demo";
-var document_name = null;
-var invalidDocumentRegx = /[^A-z0-9 ]/g;
+var defaultName = "demo";
+var documentName = null;
+var invalidDocumentRegx = /[^A-z0-9 -]/g;
 var beautify = null;
 var editor = null;
-var editor_theme = 'vibrant_ink';
-var editor_mode = 'html';
+var editorTheme = 'vibrant_ink';
+var editorMode = 'html';
 var initEditor = initACE;
 var updateCount = 0;
 // track favicons to reduce number of times replacing them
@@ -177,9 +177,9 @@ function updateWindowTitle() {
 		if (iframeTitle.length > 20) {
 			iframeTitle = iframeTitle.substr(0, 20).trim() + "...";
 		}
-		document.title = `cc:${document_name} | ${iframeTitle}`;
+		document.title = `cc:${documentName} | ${iframeTitle}`;
 	} else {
-		document.title = "cocode:" + document_name;
+		document.title = "cocode:" + documentName;
 	}
 }
 
@@ -229,18 +229,18 @@ function setFavicons(urlArray) {
 
 function getDatabaseRef() {
 	let ref = firebase.database().ref();
-	console.log('[getDatabaseRef()] document_name: ' + document_name);
+	console.log('[getDatabaseRef()] documentName: ' + documentName);
 	
-	if (document_name) {
-		ref = ref.child(document_name);
+	if (documentName) {
+		ref = ref.child(documentName);
 	} else {
 		// use default
-		document_name = default_name;
-		ref = ref.child(default_name);
+		documentName = defaultName;
+		ref = ref.child(defaultName);
 
 		// redirect to default
 		// console.log('[getDatabaseRef()] redirecting to default')
-		// window.location.search = "?" + default_name;
+		// window.location.search = "?" + defaultName;
 
 		// generate unique hash
 		//ref = ref.push();
@@ -259,14 +259,14 @@ function sanitizeDocumentName(name) {
 	return name.replaceAll(' ', '-').replace(invalidDocumentRegx, '');
 }
 
-// Update the document_name var
+// Update the documentName var
 function updateName() {
-	document_name = window.location.search.replace(/^\?/, '').toLowerCase() || default_name;
-	document_name = sanitizeDocumentName(document_name);
-	document.getElementById('document-name').value = document_name;
+	documentName = window.location.search.replace(/^\?/, '').toLowerCase() || defaultName;
+	documentName = sanitizeDocumentName(documentName);
+	document.getElementById('document-name').value = documentName;
 	updateWindowTitle();
-	$(".document-name").text("." + document_name);
-	console.log('[updateName()] ' + document_name);
+	$(".document-name").text("." + documentName);
+	console.log('[updateName()] ' + documentName);
 }
 
 function getUser() {
